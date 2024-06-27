@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  db:
+    container_name: flask_api_db
+    build:
+      context: .
+      dockerfile: DockerfilePsql
+    volumes:
+      - pgdata:/var/lib/postgres/data
+      - initdb:/docker-entrypoint-initdb.d
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_DB=POSTGRE_DB
+      - POSTGRES_USER=POSTGRE_USER
+      - POSTGRES_PASSWORD=POSTGRE_PW
+
+  web:
+    container_name: flask_web_api
+    build:
+      context: .
+      dockerfile: DockerfilePython
+    volumes:
+      - ./src:/src
+    tty: true
+    command: python run.py --host=0.0.0.0
+    ports:
+      - 5000:5000
+    depends_on:
+      - db
+
+volumes:
+  pgdata: {}
+  initdb: {}

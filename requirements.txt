@@ -1,0 +1,15 @@
+pandas
+numpy
+requests
+scipy
+tqdm
+pandas_datareader
+scikit-learn
+bs4
+beautifulsoup4
+matplotlib
+psycopg2
+sqlalchemy
+flask
+openpyxl
+flask-sqlalchemy
